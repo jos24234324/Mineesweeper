@@ -7,8 +7,7 @@ import random
 pygame.init()
 
 home = pygame.transform.scale(
-    pygame.image.load(os.path.join("HOME1.png")), (900,600)
-)
+    pygame.image.load(os.path.join("HOME1.png")), (900,600))
 Tile = 35
 scini = pygame.display.set_mode((900,600))
 pygame.display.set_caption("Minesweeper: Home")
@@ -39,7 +38,7 @@ while one:
                 MinesCount = 10
                 one = False
                 Width = Tile * cols
-                Height = Tile * rows
+                Height = Tile * rows+70
                 break
 
             #MEDIUM
@@ -60,7 +59,7 @@ while one:
                 MinesCount = 70
                 one = False
                 Width = Tile * cols
-                Height = Tile * rows
+                Height = Tile * rows+70
                 break
 
 
@@ -221,6 +220,18 @@ class Board:
         for row in [list(row) for row in zip(*self.board_list)]:
             print(row)
     def dig(self,x,y):
+        if not self.dug:
+            if not self.board_list[x][y].type=="U" :
+                return True
+            
+
+
+
+
+
+
+
+
         self.dug.append((x,y))
         if self.board_list[x][y].type=="M":
             self.board_list[x][y].known=True
