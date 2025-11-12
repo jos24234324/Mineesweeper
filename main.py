@@ -8,7 +8,9 @@ pygame.init()
 
 home = pygame.transform.scale(
     pygame.image.load(os.path.join("HOME1.png")), (900,600))
+
 Tile = 35
+
 scini = pygame.display.set_mode((900,600))
 pygame.display.set_caption("Minesweeper: Home")
 
@@ -109,6 +111,36 @@ class Game :
         self.screen.fill(BGcolour)
         self.board.draw(self.screen)
         pygame.display.flip()
+    def restart_menu(self):
+    
+    
+        restart = pygame.transform.scale(pygame.image.load(os.path.join("restart.png")), (310,70))
+        one = True
+        while one:
+            self.screen.blit(restart, ((Width//2)-155,Height-70))
+            pygame.display.update()
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    quit(0)
+
+                
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    px, py = pygame.mouse.get_pos()
+
+                    
+                    if 0< px < Width//2:
+                        
+                        game=Game()
+                        game.new()
+                        game.run()
+                        
+                        break
+                    else:
+                        pygame.quit()
+                        quit(0)
+
     def events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -129,7 +161,7 @@ class Game :
                                         tile.image=image_notABomb
                                     elif tile.type=="M":
                                         tile.known=True
-                            self.play=False
+                            self.play=False    
                 if event.button==3:
                     if not self.board.board_list[px][py].known:
                         self.board.board_list[px][py].flagged = not self.board.board_list[px][py].flagged 
@@ -147,6 +179,7 @@ class Game :
         return True
     def endgame(self):
         while True:
+            self.restart_menu()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
@@ -246,6 +279,11 @@ class Board:
                 if (row,col) not in self.dug:
                     self.dig(row,col)
         return True
+
+
+                
+                #HARD
+    
 
 
 
